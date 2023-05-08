@@ -48,5 +48,5 @@ class FlashcardApp:
         self.word_label.place(x=400, y=253, anchor=tkinter.CENTER)
 
     def set_card_state(self, img):
-        self.canvas.configure(width=img.width(), height=img.height())
+        self.canvas.configure(width=img.width(), height=img.height(), highlightthickness=0)
         self.canvas.create_image(img.width() / 2, img.height() / 2, image=img)
