@@ -1,9 +1,7 @@
-import graphical_user_interface
-
-
+import gui
 
 if __name__ == '__main__':
-    gui = graphical_user_interface.FlashcardGUI()
+    gui = gui.FlashcardApp()
     gui.set_layout()
 
     gui.screen.mainloop()
