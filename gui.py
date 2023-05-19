@@ -36,8 +36,8 @@ class FlashcardApp:
                                             text="Placeholder", background=BACKGROUND_COLOR_CARD_FRONT)
         self.word_label = tkinter.Label(master=self.canvas, font=("Arial", "60", "bold"),
                                         text="Placeholder", background=BACKGROUND_COLOR_CARD_FRONT)
-
-        self.set_card_state(img=self.card_front_img)
+        self.card_state = "Front"
+        self.update_card_image()
 
     def set_layout(self):
         self.screen.config(padx=50, pady=50, background=BACKGROUND_COLOR_CARD_BACK)
@@ -47,7 +47,11 @@ class FlashcardApp:
         self.language_label.place(x=400, y=150, anchor=tkinter.CENTER)
         self.word_label.place(x=400, y=253, anchor=tkinter.CENTER)
 
-    def set_card_state(self, img):
+    def update_card_image(self):
+        if self.card_state == "Front":
+            img = self.card_front_img
+        elif self.card_state == "Back":
+            img = self.card_back_img
         self.canvas.configure(width=img.width(), height=img.height(), highlightthickness=0)
         self.canvas.create_image(img.width() / 2, img.height() / 2, image=img)
     def set_word(self,word):
@@ -55,3 +59,15 @@ class FlashcardApp:
 
     def set_language(self, language):
         self.language_label.configure(text=language)
+
+    def set_card_state_to_front(self):
+        self.card_state = "Front"
+        self.update_card_image()
+
+    def set_card_state_to_back(self):
+        self.card_state = "Back"
+        self.update_card_image()
+
+
+
+

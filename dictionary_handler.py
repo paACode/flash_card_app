@@ -6,6 +6,7 @@ class Wordbook:
         self.original_language = None
         self.translated_language = None
         self.active_word = None
+        self.active_translation = None
         self.words = []
         self.translations = []
         self.csv_file_as_dataframe = pandas.read_csv(filepath_or_buffer=csv_file)
@@ -20,6 +21,10 @@ class Wordbook:
 
     def get_new_word(self):
         self.active_word = random.choice(self.words)
+
+    def get_translation(self):
+        index = self.words.index(self.active_word)
+        self.active_translation = self.translations[index]
 
 
 
