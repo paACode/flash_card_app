@@ -50,3 +50,8 @@ class FlashcardApp:
     def set_card_state(self, img):
         self.canvas.configure(width=img.width(), height=img.height(), highlightthickness=0)
         self.canvas.create_image(img.width() / 2, img.height() / 2, image=img)
+    def set_word(self,word):
+        self.word_label.configure(text=word)
+
+    def set_language(self, language):
+        self.language_label.configure(text=language)
