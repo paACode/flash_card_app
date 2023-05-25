@@ -22,7 +22,7 @@ class FlashcardApp:
         # Basic Elements
         self.screen = tkinter.Tk()
         self.screen.title("Flashcard App")
-        self.canvas = tkinter.Canvas()
+        self.canvas = tkinter.Canvas(background=BACKGROUND_COLOR_CARD_BACK)
         # Images
         self.tick_img = tkinter.PhotoImage(file=tick_path)
         self.cross_img = tkinter.PhotoImage(file=cross_path)
@@ -54,7 +54,8 @@ class FlashcardApp:
             img = self.card_back_img
         self.canvas.configure(width=img.width(), height=img.height(), highlightthickness=0)
         self.canvas.create_image(img.width() / 2, img.height() / 2, image=img)
-    def set_word(self,word):
+
+    def set_word(self, word):
         self.word_label.configure(text=word)
 
     def set_language(self, language):
@@ -63,11 +64,13 @@ class FlashcardApp:
     def set_card_state_to_front(self):
         self.card_state = "Front"
         self.update_card_image()
+        self.set_label_color(BACKGROUND_COLOR_CARD_FRONT)
+
+    def set_label_color(self, color):
+        self.language_label.configure(background=color)
+        self.word_label.configure(background=color)
 
     def set_card_state_to_back(self):
         self.card_state = "Back"
         self.update_card_image()
-
-
-
-
+        self.set_label_color(BACKGROUND_COLOR_CARD_BACK)
