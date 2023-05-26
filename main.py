@@ -1,20 +1,26 @@
 import dictionary_handler
 import gui
 
+
 def set_new_word():
+    gui.destroy_delay_timer_for_function(function=show_translation)
     gui.set_card_state_to_front()
     gui.set_language(french_english_dictionary.original_language)
     french_english_dictionary.get_new_word()
     gui.set_word(french_english_dictionary.active_word)
 
+
 def show_translation():
+    gui.destroy_delay_timer_for_function(function=show_translation)
     gui.set_card_state_to_back()
     gui.set_language(french_english_dictionary.translated_language)
     french_english_dictionary.get_translation()
     gui.set_word(french_english_dictionary.active_translation)
 
-def show_translation_with_delay():
-    gui.screen.after(3000,show_translation)
+def show_translation_delayed():
+    gui.create_delay_timer_for_function(delay_ms=3000, function=show_translation)
+
+
 
 if __name__ == '__main__':
     gui = gui.FlashcardApp()
@@ -22,8 +28,8 @@ if __name__ == '__main__':
     french_english_dictionary = dictionary_handler.Wordbook(csv_file="data/french_words.csv")
 
     set_new_word()
-    gui.cross_button.configure(command=set_new_word)
-    gui.tick_button.configure(command=show_translation_with_delay)
 
+    gui.cross_button.configure(command=set_new_word)
+    gui.tick_button.configure(command=show_translation_delayed)
 
     gui.screen.mainloop()

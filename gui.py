@@ -28,6 +28,7 @@ class FlashcardApp:
         self.cross_img = tkinter.PhotoImage(file=cross_path)
         self.card_front_img = tkinter.PhotoImage(file=card_front_path)
         self.card_back_img = tkinter.PhotoImage(file=card_back_path)
+        self.delay_timers = {}
 
         # Buttons and Labels
         self.tick_button = tkinter.Button(image=self.tick_img, highlightthickness=0)
@@ -74,3 +75,15 @@ class FlashcardApp:
         self.card_state = "Back"
         self.update_card_image()
         self.set_label_color(BACKGROUND_COLOR_CARD_BACK)
+
+    def create_delay_timer_for_function(self, delay_ms, function):
+        if f"{function.__name__}" not in self.delay_timers:
+            self.delay_timers[f"{function.__name__}"] = self.screen.after(delay_ms, function)
+        elif f"{function.__name__}" in self.delay_timers:
+            self.destroy_delay_timer_for_function(function)
+            self.create_delay_timer_for_function(delay_ms,function)
+
+    def destroy_delay_timer_for_function(self, function):
+        if f"{function.__name__}" in self.delay_timers:
+            self.screen.after_cancel(self.delay_timers[f"{function.__name__}"])
+            del self.delay_timers[f"{function.__name__}"]
