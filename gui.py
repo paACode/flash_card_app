@@ -8,7 +8,8 @@ cross_path = os.path.join(image_folder, "wrong.png")
 card_front_path = os.path.join(image_folder, "card_front.png")
 card_back_path = os.path.join(image_folder, "card_back.png")
 
-BACKGROUND_COLOR_CARD_BACK = "#B1DDC6"
+BACKGROUND_COLOR = "#B1DDC6"
+BACKGROUND_COLOR_CARD_BACK = "#91c2af"
 BACKGROUND_COLOR_CARD_FRONT = "#FFFFFF"
 
 
@@ -22,7 +23,7 @@ class FlashcardApp:
         # Basic Elements
         self.screen = tkinter.Tk()
         self.screen.title("Flashcard App")
-        self.canvas = tkinter.Canvas(background=BACKGROUND_COLOR_CARD_BACK)
+        self.canvas = tkinter.Canvas(background=BACKGROUND_COLOR)
         # Images
         self.tick_img = tkinter.PhotoImage(file=tick_path)
         self.cross_img = tkinter.PhotoImage(file=cross_path)
@@ -41,7 +42,7 @@ class FlashcardApp:
         self.update_card_image()
 
     def set_layout(self):
-        self.screen.config(padx=50, pady=50, background=BACKGROUND_COLOR_CARD_BACK)
+        self.screen.config(padx=50, pady=50, background=BACKGROUND_COLOR)
         self.canvas.grid(row=0, column=0, columnspan=2)
         self.cross_button.grid(row=1, column=0)
         self.tick_button.grid(row=1, column=1)
@@ -65,16 +66,17 @@ class FlashcardApp:
     def set_card_state_to_front(self):
         self.card_state = "Front"
         self.update_card_image()
-        self.set_label_color(BACKGROUND_COLOR_CARD_FRONT)
+        self.set_label_color(color_background=BACKGROUND_COLOR_CARD_FRONT, color_font="black")
 
-    def set_label_color(self, color):
-        self.language_label.configure(background=color)
-        self.word_label.configure(background=color)
+    def set_label_color(self, color_background, color_font):
+        self.language_label.configure(background=color_background, foreground=color_font)
+        self.word_label.configure(background=color_background,foreground=color_font)
+
 
     def set_card_state_to_back(self):
         self.card_state = "Back"
         self.update_card_image()
-        self.set_label_color(BACKGROUND_COLOR_CARD_BACK)
+        self.set_label_color(color_background=BACKGROUND_COLOR_CARD_BACK, color_font="White")
 
     def create_delay_timer_for_function(self, delay_ms, function):
         if f"{function.__name__}" not in self.delay_timers:
